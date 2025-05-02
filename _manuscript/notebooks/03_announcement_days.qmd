@@ -1,0 +1,108 @@
+---
+title: "03_announcement_days"
+author: "Xolani Sibande (April 2025)"
+---
+
+Importing packages:
+
+```{r}
+library(here)
+source(here("notebooks", "packages_script.R"))
+```
+
+Importing functions:
+
+```{r}
+source(here("notebooks", "functions", "fx_plot.R"))
+
+```
+
+Importing data:
+
+```{r}
+yields_tbl <- read_rds(here("notebooks","outputs", "artifacts_yields_data.rds")) |> 
+  pluck(1) 
+
+surprises_tbl <- read_rds(here("notebooks","outputs", "artifacts_surprises_data.rds")) |> 
+  pluck(2)
+```
+
+Combined data:
+
+```{r}
+announcement_days_tbl <-  
+  surprises_tbl |> 
+  left_join( yields_tbl |> 
+               pivot_wider(names_from = Series, values_from = Value),
+             by = c("Date" = "Date")) |> 
+  mutate(across(
+    c("SA", "Brazil", "China"),
+    ~ .x - lag(.x, 1), 
+    .names = "{.col}_diff")) |> 
+  filter(Date >= "2010-01-01")
+```
+
+
+EDA:
+```{r}
+announcement_days_tbl |> 
+  skim()
+```
+
+Graphing:
+
+```{r}
+#| label: fig-chart
+#| fig-cap: "chart"
+#| fig-align: center
+#| fig-width: 6
+#| fig-height: 6
+
+announcement_days_gg <- 
+  announcement_days_tbl |> 
+  pivot_longer(cols = -Date, 
+               names_to = "Series",
+               values_to = "Value") |> 
+  filter(Series %in% c("SA_diff", "Brazil_diff", "China_diff")) |> 
+  # make scatter plot
+  ggplot(aes(x = Date, y = Value, col = Series)) +
+  geom_point() +
+  facet_wrap(. ~ Series, 
+              scale = "free", 
+              labeller = label_parsed, 
+             ncol = 1, 
+             nrow = 3) +
+  theme_bw() +
+  theme(
+    legend.position = "none",
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank()
+  ) +
+  theme(
+    text = element_text(size = 8),
+    strip.background = element_rect(colour = "white", fill = "white"),
+    axis.text.x = element_text(angle = 90),
+    axis.title = element_text(size = 7),
+    plot.tag = element_text(size = 8)
+  ) +
+  labs(x = "", y = "") +
+  scale_color_manual(values = pnw_palette("Sunset2", 3))
+
+announcement_days_gg
+
+```
+
+Export:
+
+```{r}
+
+artifacts_announcement_days_data <- list (
+  announcement_days_tbl = announcement_days_tbl,
+  announcement_days_gg = announcement_days_gg
+)
+
+write_rds(artifacts_announcement_days_data, 
+          file = here("notebooks", "outputs", "artifacts_announcement_days_data.rds"))
+
+```
+

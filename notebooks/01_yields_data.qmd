@@ -1,0 +1,70 @@
+---
+title: "01_yields_data"
+author: "Xolani Sibande (April 2025)"
+---
+
+Importing packages:
+```{r}
+library(here)
+source(here("notebooks", "packages_script.R"))
+```
+
+Importing functions:
+```{r}
+source(here("notebooks", "functions", "fx_plot.R"))
+
+```
+
+
+Import data: 
+```{r}
+
+sheet_names <- excel_sheets(here("notebooks", "data", "yields.xlsx"))
+yields_tbl <- 
+  sheet_names |> 
+  map(~read_excel(here("notebooks", "Data", "yields.xlsx" ), sheet = .x)) |> 
+  set_names(sheet_names) |> 
+  map(~rename(.x, Value = 2)) |> 
+  bind_rows(.id = "Series") |> 
+  drop_na() |> 
+  mutate(Date = parse_date(Date, format = "%m/%d/%Y")) |> 
+  relocate(Date, .before = Series) |> 
+  arrange(Date) 
+
+```
+
+
+EDA:
+```{r}
+yields_tbl |> group_by(Series) |>  skim()
+
+```
+
+Graphing:
+```{r}
+#| label: fig-yields
+#| fig-cap: "Long-term yields"
+#| fig-align: center
+#| fig-width: 6
+#| fig-height: 6
+
+yields_gg <- 
+  yields_tbl |> 
+  fx_plot(variables_color = 3, ncol = 1, nrow = 3)
+yields_gg
+
+```
+
+Exporting:
+```{r}
+artifacts_yields_data <- list (
+  yields_tbl = yields_tbl,
+  yields_gg = yields_gg
+)
+
+write_rds(artifacts_yields_data, 
+          file = here("notebooks", "outputs", "artifacts_yields_data.rds"))
+
+```
+
+

@@ -1,0 +1,163 @@
+---
+title: "04_ols_models"
+author: "Xolani Sibande (April 2025)"
+---
+Importing packages: 
+
+```{r}
+library(here)
+source(here("notebooks", "packages_script.R"))
+```
+
+Importing functions:
+
+```{r}
+source(here("notebooks", "functions", "fx_plot.R"))
+source(here("notebooks", "functions", "group_ols_funcs.R"))
+
+```
+
+Importing data:
+
+```{r}
+announcement_days_tbl <- 
+  read_rds(here("notebooks", "outputs", "artifacts_announcement_days_data.rds")) |> 
+  pluck(1)
+```
+
+Running models:
+
+```{r}
+# South Africa
+vars <- c("FFR", "FG", "LSAP", "SA_diff")
+formula <- formula(value ~ SA_diff)
+
+sa_ols_models_tbl <- 
+  announcement_days_tbl |> 
+  ols_model(country_var = SA_diff,
+            vars = vars, 
+            formula = formula,
+            country_name = "South Africa")
+
+sa_residuals_tbl <- 
+  robust_residuals(announcement_days_tbl, 
+                 vars = vars, 
+                 country_var = SA_diff,
+                 formula = formula,
+                 country_replace = "SA_diff",
+                 country_name = "South Africa")
+```
+
+
+```{r}
+# Brazil
+vars <- c("FFR", "FG", "LSAP", "Brazil_diff")
+formula <- formula(value ~ Brazil_diff)
+
+brazil_ols_models_tbl <- 
+  announcement_days_tbl |> 
+  ols_model(country_var = Brazil_diff,
+            vars = vars, 
+            formula = formula,
+            country_name = "Brazil")
+
+brazil_residulas_tbl <- 
+  robust_residuals(announcement_days_tbl, 
+                 vars = vars, 
+                 country_var = Brazil_diff,
+                 formula = formula,
+                 country_replace = "Brazil_diff",
+                 country_name = "Brazil")
+```
+
+```{r}
+# China
+vars <- c("FFR", "FG", "LSAP", "China_diff")
+formula <- formula(value ~ China_diff)
+
+china_ols_models_tbl <- 
+  announcement_days_tbl |> 
+  ols_model(country_var = China_diff,
+            vars = vars, 
+            formula = formula,
+            country_name = "China")
+
+china_residulas_tbl <- 
+  robust_residuals(announcement_days_tbl, 
+                   vars = vars, 
+                   country_var = China_diff,
+                   formula = formula,
+                   country_replace = "China_diff",
+                   country_name = "China")
+
+```
+
+Combining country models
+```{r}
+ols_models_tbl <- bind_rows(
+  sa_ols_models_tbl,
+  brazil_ols_models_tbl,
+  china_ols_models_tbl
+) 
+
+ols_models_tbl
+
+```
+
+
+Graphing:
+
+```{r}
+#| label: fig-chart
+#| fig-cap: "chart"
+#| fig-align: center
+#| fig-width: 6
+#| fig-height: 6
+
+ols_residuals_tbl <- bind_rows(
+  sa_residuals_tbl,
+  brazil_residulas_tbl,
+  china_residulas_tbl
+)
+
+ols_residuals_gg <- 
+  ols_residuals_tbl |> 
+  # plot
+  ggplot(aes(x = Date, y = residuals, colour = group)) +
+  geom_point() +
+  facet_wrap(variable ~ group) +
+  theme_bw() +
+  theme(
+    legend.position = "none",
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank()
+  ) +
+  theme(
+    text = element_text(size = 8),
+    strip.background = element_rect(colour = "white", fill = "white"),
+    axis.text.x = element_text(angle = 90),
+    axis.title = element_text(size = 7),
+    plot.tag = element_text(size = 8)
+  ) +
+  labs(x = "", y = "residuals") +
+  scale_color_manual(values = pnw_palette("Sunset2", 3))
+
+ols_residuals_gg
+
+```
+
+Export:
+
+```{r}
+
+artifacts_announcement_days_ols <- list(
+  ols_models_tbl = ols_models_tbl,
+  ols_residuals_gg = ols_residuals_gg,
+  ols_residuals_tbl = ols_residuals_tbl
+)
+
+write_rds(artifacts_announcement_days_ols, 
+          file = here("notebooks", "outputs", "artifacts_announcement_days_ols.rds"))
+
+```
+

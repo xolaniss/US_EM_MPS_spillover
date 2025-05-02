@@ -1,0 +1,16 @@
+Typically, when analyzing the effects of US monetary policy on EMs, we use the Kuttner and Gurkaynak, Sack and Swanson  surprises (and the LSAP surprises a la Swanson 2023, JME during ZLB periods).. We hypothesise that while these factors capture the US monetary policy transmission within the US there might be an additional element to which the EMs respond to. Think of an event like the Taper Tantrum - assuming we classify that as a monetary policy surprise based on recent Swanson work on speeches, on that day, there was little to no adjustment in the next policy decision (i.e., minimal Kuttner-type surprise) and similarly little in terms of the GSS-style path factor. Yet, long-term yields—especially in emerging markets—spike sharply, and EM currencies tend to depreciate significantly. So my thinking is something like the following:
+ 
+•	Regress changes in long-term EM yields on US monetary policy announcement days on your three factors (Kuttner, GSS, LSAP).
+•	Extract a principal component from the residuals across a group of EMs.
+•	Is there a PC explaining these?
+ 
+Refet mentioned that it’s quite likely a factor will emerge—this often happens when we expand the set of securities—but even if it does, it might not be informative on its own. To test this further, we consider two robustness checks:
+1.	Apply the same procedure to non-event days to see if a similar EM-related factor emerges, and compare the variance across the two settings.
+2.	Perform the analysis on selected advanced economy yields to see whether an additional factor emerges for them as well on US monetary policy days.
+ 
+I have the Swanson’s surprises that Eric kindly sent me (keep it to ourselves for the moment).
+ 
+There is also another paper that does the US news slightly differently (When is Bad News Good News? U.S. Monetary Policy, Macroeconomic News, and Financial Conditions in Emerging Markets – or rather the published JIE version of this).
+ 
+How do these sound to start with?
+

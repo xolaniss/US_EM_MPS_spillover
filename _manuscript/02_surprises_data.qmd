@@ -1,0 +1,66 @@
+---
+title: "02_suprises_data"
+author: "Xolani Sibande (April 2025)"
+---
+
+```{r}
+#| message: false
+library(here)
+source(here("notebooks", "packages_script.R"))
+```
+
+Importing functions:
+
+```{r}
+source(here("notebooks", "functions", "fx_plot.R"))
+
+```
+
+
+Importing data:
+
+```{r}
+
+```
+
+Cleaning data:
+
+```{r}
+
+```
+
+Transformations:
+
+```{r}
+
+```
+
+EDA:
+
+```{r}
+
+```
+
+Graphing:
+
+```{r}
+#| label: fig-chart
+#| fig-cap: "chart"
+#| fig-align: center
+#| fig-width: 6
+#| fig-height: 6
+
+
+```
+
+Export:
+
+```{r}
+
+artifacts_ <- list(
+
+)
+
+write_rds(artifacts_, file = here("notebooks", "outputs", "artifacts_.rds"))
+
+```

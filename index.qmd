@@ -1,0 +1,35 @@
+---
+title: US_EM_MPS_spillover
+authors:
+  - name: Xolani Sibande
+    affiliation: South Africa Reserve Bank
+    roles: writing
+    corresponding: true
+bibliography: references.bib
+---
+
+
+# Introduction
+@fornero2011effect
+
+# Literature Review
+
+# Data and Methodology
+
+# Results
+
+# Conclusion
+
+# Reference {.unnurmbered}
+
+:::{#refs}
+
+:::
+
+# Appendix
+## Data
+
+
+
+
+

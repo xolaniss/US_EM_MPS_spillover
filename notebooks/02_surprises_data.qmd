@@ -1,0 +1,86 @@
+---
+title: "02_suprises_data"
+author: "Xolani Sibande (April 2025)"
+---
+
+
+```{r}
+#| message: false
+library(here)
+source(here("notebooks", "packages_script.R"))
+```
+
+Importing functions:
+
+```{r}
+source(here("notebooks", "functions", "fx_plot.R"))
+
+```
+
+
+Importing data:
+
+```{r}
+surprises_wide_tbl <- read_excel(here("notebooks","data", "factors2023.xlsx")) |> 
+  mutate(
+    Date = as.Date(paste0(year,"-", month, "-", day))
+  ) |> 
+  relocate(
+    Date,
+    .before = year
+  ) |> 
+  dplyr::select(
+    -c(year, month, day, `-LSAP`)
+  ) 
+
+surprises_tbl <- 
+  surprises_wide_tbl |> 
+  pivot_longer(
+    cols = -Date,
+    names_to = "Series",
+    values_to = "Value"
+  )
+
+```
+
+
+EDA:
+
+```{r}
+surprises_tbl |> 
+  group_by(Series) |> 
+  skim()
+```
+
+Graphing:
+
+```{r}
+#| label: fig-surprises
+#| fig-cap: "Monetary policy surprises"
+#| fig-align: center
+#| fig-width: 6
+#| fig-height: 4
+
+surprises_gg <- 
+  surprises_tbl |> 
+  fx_plot(
+    variables_color = 4
+  )
+
+surprises_gg
+```
+
+Export:
+
+```{r}
+
+artifacts_surprises_data <- list (
+  surprises_tbl = surprises_tbl,
+  surprises_wide_tbl = surprises_wide_tbl,
+  surprises_gg = surprises_gg
+)
+
+write_rds(artifacts_surprises_data, file = here("notebooks", "outputs", 
+                                                "artifacts_surprises_data.rds"))
+
+```
