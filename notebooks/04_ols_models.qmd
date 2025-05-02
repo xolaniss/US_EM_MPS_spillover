@@ -20,9 +20,9 @@ source(here("notebooks", "functions", "group_ols_funcs.R"))
 Importing data:
 
 ```{r}
-announcement_days_tbl <- 
-  read_rds(here("notebooks", "outputs", "artifacts_announcement_days_data.rds")) |> 
-  pluck(1)
+board <- board_gdrive("https://drive.google.com/drive/folders/1wlEf0FcbOSxjaoVxa8MFkE8aiSjSPMfA")
+announcement_days_tbl <-
+  pin_read(board, "artifacts_announcement_days_data") |>  pluck(1)
 ```
 
 Running models:
@@ -104,7 +104,6 @@ ols_models_tbl
 
 ```
 
-
 Graphing:
 
 ```{r}
@@ -152,12 +151,13 @@ Export:
 
 artifacts_announcement_days_ols <- list(
   ols_models_tbl = ols_models_tbl,
-  ols_residuals_gg = ols_residuals_gg,
   ols_residuals_tbl = ols_residuals_tbl
 )
 
-write_rds(artifacts_announcement_days_ols, 
-          file = here("notebooks", "outputs", "artifacts_announcement_days_ols.rds"))
-
+pin_write(board, 
+          artifacts_announcement_days_ols, 
+          name = "artifacts_announcement_days_ols", 
+          versioned = TRUE,
+          type = "rds")
 ```
 

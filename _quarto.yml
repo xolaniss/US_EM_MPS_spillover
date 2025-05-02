@@ -5,14 +5,19 @@ manuscript:
   article: index.qmd
 
 format:
+  elsevier-pdf:
+    keep-tex: true 
+    journal:
+      name: Journal Name
+      formatting: preprint
+      model: 3p
+      layout: onecolumn
+      cite-style: authoryear
   html:
     comments:
       hypothesis: true
   docx: default
   jats: default
-
-  # (other formats)
-  pdf: default
 
 execute:
   freeze: false

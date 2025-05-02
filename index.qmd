@@ -2,34 +2,38 @@
 title: US_EM_MPS_spillover
 authors:
   - name: Xolani Sibande
-    affiliation: South Africa Reserve Bank
+    affiliation: South Africa Reserve Bank.
     roles: writing
     corresponding: true
+    email: xolani.sibande@resbank.co.za
+keywords:
+  - La Palma
+  - Earthquakes
+abstract: |
+  Ipsum. 
 bibliography: references.bib
+number-sections: true
 ---
 
-
 # Introduction
+
 @fornero2011effect
 
 # Literature Review
 
 # Data and Methodology
 
-# Results
-
 # Conclusion
 
-# Reference {.unnurmbered}
+one tow three. [^1]
 
-:::{#refs}
+[^1]: afj;lakdfj;aldjfkajdf;ladf.
 
+# Reference {.unnumbered}
+
+::: {#refs}
 :::
 
-# Appendix
+# Appendix {.unnumbered}
+
 ## Data
-
-
-
-
-

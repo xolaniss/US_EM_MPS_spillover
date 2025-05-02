@@ -20,11 +20,9 @@ source(here("notebooks", "functions", "fx_plot.R"))
 Importing data:
 
 ```{r}
-yields_tbl <- read_rds(here("notebooks","outputs", "artifacts_yields_data.rds")) |> 
-  pluck(1) 
-
-surprises_tbl <- read_rds(here("notebooks","outputs", "artifacts_surprises_data.rds")) |> 
-  pluck(2)
+board <- board_gdrive("https://drive.google.com/drive/folders/1wlEf0FcbOSxjaoVxa8MFkE8aiSjSPMfA")
+yields_tbl <- pin_read(board, "artifacts_yields_data") |> pluck(1) 
+surprises_tbl <- pin_read(board, "artifacts_surprises_data") |> pluck(2)
 ```
 
 Combined data:
@@ -97,12 +95,13 @@ Export:
 ```{r}
 
 artifacts_announcement_days_data <- list (
-  announcement_days_tbl = announcement_days_tbl,
-  announcement_days_gg = announcement_days_gg
+  announcement_days_tbl = announcement_days_tbl
 )
 
-write_rds(artifacts_announcement_days_data, 
-          file = here("notebooks", "outputs", "artifacts_announcement_days_data.rds"))
+pin_write(board, 
+         artifacts_announcement_days_data, 
+         name = "artifacts_announcement_days_data", 
+         type = "rds")
 
 ```
 

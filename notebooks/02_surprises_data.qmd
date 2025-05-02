@@ -21,6 +21,8 @@ source(here("notebooks", "functions", "fx_plot.R"))
 Importing data:
 
 ```{r}
+board <- board_gdrive("https://drive.google.com/drive/folders/1wlEf0FcbOSxjaoVxa8MFkE8aiSjSPMfA")
+
 surprises_wide_tbl <- read_excel(here("notebooks","data", "factors2023.xlsx")) |> 
   mutate(
     Date = as.Date(paste0(year,"-", month, "-", day))
@@ -76,11 +78,12 @@ Export:
 
 artifacts_surprises_data <- list (
   surprises_tbl = surprises_tbl,
-  surprises_wide_tbl = surprises_wide_tbl,
-  surprises_gg = surprises_gg
+  surprises_wide_tbl = surprises_wide_tbl
 )
 
-write_rds(artifacts_surprises_data, file = here("notebooks", "outputs", 
-                                                "artifacts_surprises_data.rds"))
+pin_write(board, 
+          artifacts_surprises_data, 
+          versioned = TRUE,
+          type = "rds")
 
 ```

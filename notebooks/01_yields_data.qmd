@@ -4,20 +4,24 @@ author: "Xolani Sibande (April 2025)"
 ---
 
 Importing packages:
+
 ```{r}
 library(here)
 source(here("notebooks", "packages_script.R"))
 ```
 
 Importing functions:
+
 ```{r}
 source(here("notebooks", "functions", "fx_plot.R"))
 
 ```
 
+Import data:
 
-Import data: 
 ```{r}
+
+board <- board_gdrive("https://drive.google.com/drive/folders/1wlEf0FcbOSxjaoVxa8MFkE8aiSjSPMfA")
 
 sheet_names <- excel_sheets(here("notebooks", "data", "yields.xlsx"))
 yields_tbl <- 
@@ -33,14 +37,15 @@ yields_tbl <-
 
 ```
 
-
 EDA:
+
 ```{r}
 yields_tbl |> group_by(Series) |>  skim()
 
 ```
 
 Graphing:
+
 ```{r}
 #| label: fig-yields
 #| fig-cap: "Long-term yields"
@@ -56,15 +61,16 @@ yields_gg
 ```
 
 Exporting:
+
 ```{r}
 artifacts_yields_data <- list (
-  yields_tbl = yields_tbl,
-  yields_gg = yields_gg
+  yields_tbl = yields_tbl
 )
 
-write_rds(artifacts_yields_data, 
-          file = here("notebooks", "outputs", "artifacts_yields_data.rds"))
+pin_write(board, 
+          artifacts_yields_data, 
+          versioned = TRUE,
+          type = "rds")
+
 
 ```
-
-

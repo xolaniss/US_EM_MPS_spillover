@@ -13,6 +13,7 @@ library(pins)
 library(timetk)
 library(uniqtag)
 library(quantmod)
+library(pins)
 
 # graphs
 library(PNWColors)
