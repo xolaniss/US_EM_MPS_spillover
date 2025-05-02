@@ -2,11 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="keywords" content="La Palma, Earthquakes">
 
 <title>US_EM_MPS_spillover</title>
 <style>
@@ -54,6 +53,9 @@ div.csl-indent {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script async="" src="https://hypothes.is/embed.js"></script>
 <script>
   window.document.addEventListener("DOMContentLoaded", function (_event) {
@@ -64,9 +66,13 @@ div.csl-indent {
 
 <meta name="citation_title" content="US_EM_MPS_spillover">
 <meta name="citation_abstract" content="Ipsum.
+\newline
+\newline
+**Keywords**: Monetary policy surprises \newline
+**JEL Codes**: J10, H1, K3
 ">
-<meta name="citation_keywords" content="La Palma,Earthquakes">
 <meta name="citation_author" content="Xolani Sibande">
+<meta name="citation_author" content="Özer Karagedikli">
 <meta name="citation_language" content="en">
 <meta name="citation_reference" content="citation_title=The effect of financial literacy on mortgage choices;,citation_author=Elsa Fornero;,citation_author=Chiara Monticone;,citation_author=Serena Trucchi;,citation_publication_date=2011;,citation_cover_date=2011;,citation_year=2011;,citation_publisher=Netspar Discussion Paper;">
 </head>
@@ -83,15 +89,23 @@ div.csl-indent {
     <div class="quarto-title-meta-container">
       <div class="quarto-title-meta-column-start">
             <div class="quarto-title-meta-author">
-          <div class="quarto-title-meta-heading">Author</div>
-          <div class="quarto-title-meta-heading">Affiliation</div>
+          <div class="quarto-title-meta-heading">Authors</div>
+          <div class="quarto-title-meta-heading">Affiliations</div>
           
                 <div class="quarto-title-meta-contents">
             <p class="author">Xolani Sibande <a href="mailto:xolani.sibande@resbank.co.za" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
           </div>
                 <div class="quarto-title-meta-contents">
                     <p class="affiliation">
-                        South Africa Reserve Bank.
+                        South Africa Reserve Bank
+                      </p>
+                  </div>
+                      <div class="quarto-title-meta-contents">
+            <p class="author">Özer Karagedikli <a href="mailto:ozer.karagedikli@asb.edu.my" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+          </div>
+                <div class="quarto-title-meta-contents">
+                    <p class="affiliation">
+                        Asia School of Business
                       </p>
                   </div>
                     </div>
@@ -110,16 +124,10 @@ div.csl-indent {
     <div>
       <div class="abstract">
         <div class="block-title">Abstract</div>
-        <p>Ipsum.</p>
+        <p>Ipsum. <strong>Keywords</strong>: Monetary policy surprises <strong>JEL Codes</strong>: J10, H1, K3</p>
       </div>
     </div>
 
-    <div>
-      <div class="keywords">
-        <div class="block-title">Keywords</div>
-        <p>La Palma, Earthquakes</p>
-      </div>
-    </div>
 
     <div class="quarto-other-links-text-target">
     </div>  </div>
@@ -139,9 +147,9 @@ div.csl-indent {
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">4.1</span> Data</a></li>
   </ul></li>
   </ul>
-<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="notebooks/04_ols_models-preview.html"><i class="bi bi-journal-code"></i>04_ols_models</a></li><li><a href="notebooks/01_yields_data-preview.html"><i class="bi bi-journal-code"></i>01_yields_data</a></li><li><a href="notebooks/03_announcement_days-preview.html"><i class="bi bi-journal-code"></i>03_announcement_days</a></li><li><a href="notebooks/02_surprises_data-preview.html"><i class="bi bi-journal-code"></i>02_suprises_data</a></li></ul></div></nav>
+<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="notebooks/01_yields_data-preview.html"><i class="bi bi-journal-code"></i>01_yields_data</a></li><li><a href="notebooks/02_surprises_data-preview.html"><i class="bi bi-journal-code"></i>02_suprises_data</a></li><li><a href="notebooks/03_announcement_days-preview.html"><i class="bi bi-journal-code"></i>03_announcement_days</a></li><li><a href="notebooks/04_ols_models-preview.html"><i class="bi bi-journal-code"></i>04_ols_models</a></li></ul></div></nav>
 </div>
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
 </div>
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -176,6 +184,22 @@ Fornero, Elsa, Chiara Monticone, and Serena Trucchi. 2011. <span>“The Effect o
 <h1 class="unnumbered">Appendix</h1>
 <section id="data" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="data"><span class="header-section-number">4.1</span> Data</h2>
+<div class="quarto-embed-nb-cell">
+<div id="cell-fig-yields" class="cell" data-layout-align="center" data-fig-width="6" data-fig-height="6">
+<div class="cell-output cell-output-display">
+<div id="fig-yields" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-yields-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/notebooks-01_yields_data-fig-yields-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: Long-term yields"><img src="index_files/figure-html/notebooks-01_yields_data-fig-yields-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-yields-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Long-term yields
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -222,18 +246,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -265,7 +278,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -273,7 +308,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -597,6 +632,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

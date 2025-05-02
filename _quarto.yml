@@ -8,7 +8,7 @@ format:
   elsevier-pdf:
     keep-tex: true 
     journal:
-      name: Journal Name
+      name:
       formatting: preprint
       model: 3p
       layout: onecolumn

@@ -51,11 +51,11 @@ Graphing:
 #| fig-cap: "Long-term yields"
 #| fig-align: center
 #| fig-width: 6
-#| fig-height: 6
+#| fig-height: 3
 
 yields_gg <- 
   yields_tbl |> 
-  fx_plot(variables_color = 3, ncol = 1, nrow = 3)
+  fx_plot(variables_color = 3, ncol = 3, nrow = 1)
 yields_gg
 
 ```

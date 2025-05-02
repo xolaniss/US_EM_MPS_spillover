@@ -44,14 +44,28 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \setcounter{secnumdepth}{5}
 % Make \paragraph and \subparagraph free-standing
+\makeatletter
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
-  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
 \fi
 \ifx\subparagraph\undefined\else
   \let\oldsubparagraph\subparagraph
-  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
+\makeatother
 
 
 \providecommand{\tightlist}{%
@@ -120,7 +134,8 @@
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
-\journal{Journal Name}
+\journal{}
+
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -132,13 +147,13 @@
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
   pdftitle={US\_EM\_MPS\_spillover},
-  pdfkeywords={La Palma, Earthquakes},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
   citecolor={Blue},
   urlcolor={Blue},
   pdfcreator={LaTeX via pandoc}}
+
 
 \setlength{\parindent}{6pt}
 \begin{document}
@@ -149,38 +164,46 @@
 \corref{cor1}%
 }
  \ead{xolani.sibande@resbank.co.za} 
+\author[2]{Özer Karagedikli%
+%
+}
+ \ead{ozer.karagedikli@asb.edu.my} 
 
-\affiliation[1]{organization={South Africa Reserve
-Bank.},,postcodesep={}}
+\affiliation[1]{organization={South Africa Reserve Bank, Economic
+Research Department},country={South
+Africa},countrysep={,},postcodesep={}}
+\affiliation[2]{organization={Asia School of
+Business},country={Malaysia},countrysep={,},postcodesep={}}
 
 \cortext[cor1]{Corresponding author}
 
+
         
 \begin{abstract}
-Ipsum.
+Ipsum. \newline \newline \textbf{Keywords}: Monetary policy surprises
+\newline \textbf{JEL Codes}: J10, H1, K3
 \end{abstract}
 
 
 
 
 
-\begin{keyword}
-    La Palma \sep 
-    Earthquakes
-\end{keyword}
 \end{frontmatter}
     
+
 \section{Introduction}\label{introduction}
 
 \citet{fornero2011effect}
 
 \section{Literature Review}\label{literature-review}
 
+\citet{pescatori2018}
+
 \section{Data and Methodology}\label{data-and-methodology}
 
 \section{Conclusion}\label{conclusion}
 
-one tow three. \footnote{afj;lakdfj;aldjfkajdf;ladf.}
+\newpage
 
 \section*{Reference}\label{reference}
 \addcontentsline{toc}{section}{Reference}
@@ -188,10 +211,42 @@ one tow three. \footnote{afj;lakdfj;aldjfkajdf;ladf.}
 \renewcommand{\bibsection}{}
 \bibliography{references.bib}
 
-\section*{Appendix}\label{appendix}
-\addcontentsline{toc}{section}{Appendix}
+\setcounter{section}{0}
+\renewcommand{\thesection}{\Alph{section}}
+\setcounter{table}{0}
+\renewcommand{\thetable}{A\arabic{table}}
+\setcounter{figure}{0}
+\renewcommand{\thefigure}{A\arabic{figure}}
+\newpage
+
+\section{Appendix}\label{appendix}
 
 \subsection{Data}\label{data}
+
+\begin{figure}
+
+\centering{
+
+\includegraphics{index_files/figure-latex/notebooks-01_yields_data-fig-yields-output-1.png}
+
+}
+
+\caption{\label{fig-yields}Long-term yields}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\includegraphics{index_files/figure-latex/notebooks-02_surprises_data-fig-surprises-output-1.png}
+
+}
+
+\caption{\label{fig-surprises}Monetary policy surprises}
+
+\end{figure}%
+
 
 
 

@@ -2,17 +2,28 @@
 title: US_EM_MPS_spillover
 authors:
   - name: Xolani Sibande
-    affiliation: South Africa Reserve Bank.
+    affiliation: 
+    - name: South Africa Reserve Bank
+      department: Economic Research Department
+      country: South Africa
     roles: writing
     corresponding: true
     email: xolani.sibande@resbank.co.za
-keywords:
-  - La Palma
-  - Earthquakes
+  - name: Özer Karagedikli
+    affiliation: 
+    - name: Asia School of Business 
+      country: Malaysia
+    email:  ozer.karagedikli@asb.edu.my
 abstract: |
   Ipsum. 
+  \newline
+  \newline
+  **Keywords**: Monetary policy surprises \newline
+  **JEL Codes**: J10, H1, K3 
+
 bibliography: references.bib
 number-sections: true
+notebook-links: false
 ---
 
 # Introduction
@@ -21,19 +32,31 @@ number-sections: true
 
 # Literature Review
 
+@pescatori2018
+
 # Data and Methodology
 
 # Conclusion
 
-one tow three. [^1]
-
-[^1]: afj;lakdfj;aldjfkajdf;ladf.
+\newpage
 
 # Reference {.unnumbered}
 
 ::: {#refs}
 :::
 
-# Appendix {.unnumbered}
+\setcounter{section}{0}
+\renewcommand{\thesection}{\Alph{section}}
+\setcounter{table}{0}
+\renewcommand{\thetable}{A\arabic{table}}
+\setcounter{figure}{0}
+\renewcommand{\thefigure}{A\arabic{figure}}
+\newpage
+
+# Appendix
 
 ## Data
+
+{{< embed notebooks/01_yields_data.qmd#fig-yields >}}
+
+{{< embed notebooks/02_surprises_data.qmd#fig-surprises >}}
