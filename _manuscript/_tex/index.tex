@@ -1,4 +1,5 @@
 % Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
@@ -8,21 +9,22 @@
   preprint,
   3p,
   onecolumn]{elsarticle}
-
+\usepackage{xcolor}
 \usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
 \usepackage{lmodern}
-\ifPDFTeX\else  
-    % xetex/luatex font selection
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -40,9 +42,6 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
-\setlength{\emergencystretch}{3em} % prevent overfull lines
-\setcounter{secnumdepth}{5}
 % Make \paragraph and \subparagraph free-standing
 \makeatletter
 \ifx\paragraph\undefined\else
@@ -68,8 +67,7 @@
 \makeatother
 
 
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -81,18 +79,56 @@
 \makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
 % Set default figure placement to htbp
-\makeatletter
 \def\fps@figure{htbp}
 \makeatother
 
+
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+\usepackage[]{natbib}
+\bibliographystyle{elsarticle-harv}
+
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{fontspec}
+\usepackage{multicol}
+\usepackage{hhline}
+\newlength\Oldarrayrulewidth
+\newlength\Oldtabcolsep
+\usepackage{hyperref}
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \AtBeginDocument{%
@@ -134,17 +170,10 @@
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
-\journal{}
-
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
-\usepackage[]{natbib}
-\bibliographystyle{elsarticle-harv}
+\journal{SARB Working Paper Series}
 \usepackage{bookmark}
-
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{same}
 \hypersetup{
   pdftitle={US\_EM\_MPS\_spillover},
   colorlinks=true,
@@ -160,20 +189,20 @@
 
 \begin{frontmatter}
 \title{US\_EM\_MPS\_spillover}
-\author[1]{Xolani Sibande%
-\corref{cor1}%
-}
- \ead{xolani.sibande@resbank.co.za} 
-\author[2]{Özer Karagedikli%
+\author[1]{Özer Karagedikli%
 %
 }
  \ead{ozer.karagedikli@asb.edu.my} 
+\author[2]{Xolani Sibande%
+\corref{cor1}%
+}
+ \ead{xolani.sibande@resbank.co.za} 
 
-\affiliation[1]{organization={South Africa Reserve Bank, Economic
+\affiliation[1]{organization={Asia School of
+Business},country={Malaysia},countrysep={,},postcodesep={}}
+\affiliation[2]{organization={South Africa Reserve Bank, Economic
 Research Department},country={South
 Africa},countrysep={,},postcodesep={}}
-\affiliation[2]{organization={Asia School of
-Business},country={Malaysia},countrysep={,},postcodesep={}}
 
 \cortext[cor1]{Corresponding author}
 
@@ -193,13 +222,128 @@ Ipsum. \newline \newline \textbf{Keywords}: Monetary policy surprises
 
 \section{Introduction}\label{introduction}
 
-\citet{fornero2011effect}
-
 \section{Literature Review}\label{literature-review}
 
-\citet{pescatori2018}
+\citet{gurkaynak2005}
 
 \section{Data and Methodology}\label{data-and-methodology}
+
+\newpage
+
+\section{Results}\label{results}
+
+\global\setlength{\Oldarrayrulewidth}{\arrayrulewidth}
+
+\global\setlength{\Oldtabcolsep}{\tabcolsep}
+
+\setlength{\tabcolsep}{2pt}
+
+\renewcommand*{\arraystretch}{1.5}
+
+
+
+\providecommand{\ascline}[3]{\noalign{\global\arrayrulewidth #1}\arrayrulecolor[HTML]{#2}\cline{#3}}
+
+\begin{longtable}[c]{|p{1.18in}|p{1.48in}|p{1.60in}|p{1.01in}}
+
+\caption{\label{tbl-ols_models}Ols models}
+
+\tabularnewline
+
+\ascline{0.75pt}{000000}{1-4}
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.18in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{Factor}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.48in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{Constant}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.6in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{Change\ in\ yield}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.01in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{N}}}} \\
+
+\ascline{0.75pt}{000000}{1-4}\endfirsthead 
+
+\ascline{0.75pt}{000000}{1-4}
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.18in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{Factor}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.48in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{Constant}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.6in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{Change\ in\ yield}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.01in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{N}}}} \\
+
+\ascline{0.75pt}{000000}{1-4}\endhead
+
+
+
+\multicolumn{4}{>{\centering}m{\dimexpr 5.28in+6\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{South\ Africa}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.18in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{FFR}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.48in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{0.058639}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.6in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{0.032138}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.01in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{83}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.18in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{FG}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.48in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{0.013990}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.6in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{-0.10630}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.01in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{83}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.18in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{LSAP}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.48in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{0.122229}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.6in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{0.047029}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.01in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{83}}}} \\
+
+
+
+
+
+\multicolumn{4}{>{\centering}m{\dimexpr 5.28in+6\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{Brazil}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.18in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{FFR}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.48in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{0.090091}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.6in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{-0.03042}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.01in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{85}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.18in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{FG}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.48in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{0.018807}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.6in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{0.043985}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.01in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{85}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.18in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{LSAP}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.48in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{0.071922}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.6in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{-0.08903}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.01in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{85}}}} \\
+
+
+
+
+
+\multicolumn{4}{>{\centering}m{\dimexpr 5.28in+6\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{China}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.18in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{FFR}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.48in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{0.117749***}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.6in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{0.078256}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.01in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{98}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.18in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{FG}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.48in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{0.050576}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.6in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{-0.11419}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.01in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{98}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.18in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{LSAP}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.48in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{0.089220}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.6in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{0.369883}}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.01in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{16}\selectfont{\global\setmainfont{Times New Roman}{98}}}} \\
+
+\ascline{0.75pt}{000000}{1-4}
+
+
+\end{longtable}
+
+\arrayrulecolor[HTML]{000000}
+
+\global\setlength{\arrayrulewidth}{\Oldarrayrulewidth}
+
+\global\setlength{\tabcolsep}{\Oldtabcolsep}
+
+\renewcommand*{\arraystretch}{1}
 
 \section{Conclusion}\label{conclusion}
 
@@ -223,11 +367,11 @@ Ipsum. \newline \newline \textbf{Keywords}: Monetary policy surprises
 
 \subsection{Data}\label{data}
 
-\begin{figure}
+\begin{figure}[H]
 
 \centering{
 
-\includegraphics{index_files/figure-latex/notebooks-01_yields_data-fig-yields-output-1.png}
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-latex/notebooks-01_yields_data-fig-yields-output-1.png}}
 
 }
 
@@ -235,15 +379,31 @@ Ipsum. \newline \newline \textbf{Keywords}: Monetary policy surprises
 
 \end{figure}%
 
-\begin{figure}
+\begin{figure}[H]
 
 \centering{
 
-\includegraphics{index_files/figure-latex/notebooks-02_surprises_data-fig-surprises-output-1.png}
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-latex/notebooks-02_surprises_data-fig-surprises-output-1.png}}
 
 }
 
 \caption{\label{fig-surprises}Monetary policy surprises}
+
+\end{figure}%
+
+\newpage
+
+\subsection{Residuals}\label{residuals}
+
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-latex/notebooks-04_ols_models-fig-residuals-output-2.png}}
+
+}
+
+\caption{\label{fig-residuals}Model residuals}
 
 \end{figure}%
 

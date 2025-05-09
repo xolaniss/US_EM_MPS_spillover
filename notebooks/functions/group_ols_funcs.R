@@ -69,16 +69,16 @@ robust_residuals <-
       dplyr::select(-models) |> 
       unnest(cols = models_coef, names_repair = "universal") |> 
       unnest(cols = data, names_repair = "universal") |> 
-      dplyr::select(-c(std.error, statistic, p.value)) |> 
+      dplyr::select(-c(std.error, statistic, p.value)) |>
       mutate(term = str_replace(term, country_replace, "estimate")) |>
       mutate(term = str_replace(term, "\\(Intercept\\)", "constant")) |>
-      pivot_wider( names_from = term, 
+      pivot_wider( names_from = term,
                    values_from = estimate,
-                   names_repair = "unique") |> 
+                   names_repair = "unique") |>
       mutate(
         residuals = value - constant - estimate * {{ country_var }}
-      ) |> 
-      dplyr::select(Date, variable, residuals) |> 
-      ungroup() |> 
+      ) |>
+      dplyr::select(Date, variable, residuals) |>
+      ungroup() |>
       mutate(group = country_name)
   }

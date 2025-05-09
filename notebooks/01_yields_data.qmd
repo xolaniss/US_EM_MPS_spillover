@@ -51,7 +51,7 @@ Graphing:
 #| fig-cap: "Long-term yields"
 #| fig-align: center
 #| fig-width: 6
-#| fig-height: 3
+#| fig-height: 2.5
 
 yields_gg <- 
   yields_tbl |> 

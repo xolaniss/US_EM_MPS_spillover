@@ -14,6 +14,14 @@ library(timetk)
 library(uniqtag)
 library(quantmod)
 library(pins)
+library(flextable)
+library(gt)
+library(officer)
+library(officedown)
+library(modelsummary)
+library(sandwich)
+library(lmtest)
+library(stargazer) 
 
 # graphs
 library(PNWColors)
@@ -36,4 +44,7 @@ library(car)
 library(furrr)
 library(parallel)
 library(tictoc)
+
+
+  
 })))

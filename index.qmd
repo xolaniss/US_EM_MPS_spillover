@@ -1,6 +1,11 @@
 ---
 title: US_EM_MPS_spillover
 authors:
+  - name: Özer Karagedikli
+    affiliation: 
+    - name: Asia School of Business 
+      country: Malaysia
+    email:  ozer.karagedikli@asb.edu.my
   - name: Xolani Sibande
     affiliation: 
     - name: South Africa Reserve Bank
@@ -9,11 +14,6 @@ authors:
     roles: writing
     corresponding: true
     email: xolani.sibande@resbank.co.za
-  - name: Özer Karagedikli
-    affiliation: 
-    - name: Asia School of Business 
-      country: Malaysia
-    email:  ozer.karagedikli@asb.edu.my
 abstract: |
   Ipsum. 
   \newline
@@ -26,15 +26,59 @@ number-sections: true
 notebook-links: false
 ---
 
-# Introduction
+```{r}
+# label: functions
 
-@fornero2011effect
+library(here)
+source(here("notebooks", "packages_script.R"))
+source(here("notebooks","functions","modelsummary_pdf.R" ))
+source(here("notebooks","functions","borderlines.R" ))
+source(here("notebooks", "functions", "flextable_pdf.R"))
+
+set_flextable_defaults(font.size = 8, 
+                       text.align = "left", 
+                       font.color = "black", 
+                       theme_fun = theme_apa, 
+                       padding = 0,
+                       line_spacing = 0)
+```
+
+# Introduction
 
 # Literature Review
 
-@pescatori2018
+@gurkaynak2005
 
 # Data and Methodology
+
+\newpage
+
+# Results
+
+```{r}
+#label: ols_data
+
+board <- board_gdrive("https://drive.google.com/drive/folders/1wlEf0FcbOSxjaoVxa8MFkE8aiSjSPMfA")
+
+modeling_data <- pin_read(board, "artifacts_announcement_days_ols")
+
+ols_models_tbl <- modeling_data |> pluck(1)
+resid_models_tbl <- modeling_data |> pluck(2)
+```
+
+```{r}
+#| label: tbl-ols_models
+#| tbl-cap: "Ols models"
+#| ft.arraystrech: .4
+ols_models_tbl |> 
+  dplyr::select(-`R^2`) |> 
+  as_grouped_data(groups = c("group"), expand_single = TRUE) |> 
+  as_flextable(hide_grouplabel = TRUE) |> 
+  align(align = "left", part = "all") |> 
+  align(align = "center", i = c("1", "5", "9")) |> 
+  autofit(add_w = .9)
+
+```
 
 # Conclusion
 
@@ -60,3 +104,9 @@ notebook-links: false
 {{< embed notebooks/01_yields_data.qmd#fig-yields >}}
 
 {{< embed notebooks/02_surprises_data.qmd#fig-surprises >}}
+
+\newpage
+
+## Residuals
+
+{{< embed notebooks/04_ols_models.qmd#fig-residuals >}}

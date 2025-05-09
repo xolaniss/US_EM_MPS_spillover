@@ -107,8 +107,8 @@ ols_models_tbl
 Graphing:
 
 ```{r}
-#| label: fig-chart
-#| fig-cap: "chart"
+#| label: fig-residuals
+#| fig-cap: "Model residuals"
 #| fig-align: center
 #| fig-width: 6
 #| fig-height: 6

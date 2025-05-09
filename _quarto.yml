@@ -8,11 +8,16 @@ format:
   elsevier-pdf:
     keep-tex: true 
     journal:
-      name:
+      name: "SARB Working Paper Series"
       formatting: preprint
       model: 3p
       layout: onecolumn
       cite-style: authoryear
+    fig-format: png
+    default-image-extension: png
+    fig-pos: "H"
+    tbl-cap-location: top
+    dpi: 250
   html:
     comments:
       hypothesis: true

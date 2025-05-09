@@ -61,7 +61,7 @@ Graphing:
 #| fig-cap: "Monetary policy surprises"
 #| fig-align: center
 #| fig-width: 6
-#| fig-height: 3
+#| fig-height: 2.5
 
 surprises_gg <- 
   surprises_tbl |> 
